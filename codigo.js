@@ -35,8 +35,8 @@ function draw() {
     bird.position.y += bird.velocity.y;
     textAlign(CENTER);
     textSize(20);
-    text(`Puntos: ${puntos}`, 660, 30);
     drawSprites();
+    text(`Puntos: ${puntos}`, 640, 30); 
     if (tb.position.x < -70) {
         puntos ++;
         tb.position.x = 810;
@@ -57,6 +57,9 @@ function draw() {
         tb6.position.x = 810;
         tb6.position.y = random(-100, 200);
         tb5.position.y = tb6.position.y + 750;
+    }
+    if (bird.overlap(tb) || bird.overlap(tb2) || bird.overlap(tb3) || bird.overlap(tb4) || bird.overlap(tb5) || bird.overlap(tb6) || bird.position.y > 800) {
+        gameover();
     }
 }
 
@@ -89,4 +92,26 @@ function tuberias() {
     tb6 = createSprite(xtb6, ytb6, 60, 500);
     tb6.shapeColor = color(48, 184, 12);
     tb6.velocity.x = -3;
+}
+
+function gameover() {
+    clear();
+    tb.velocity.x = 0;
+    tb2.velocity.x = 0;
+    tb3.velocity.x = 0;
+    tb4.velocity.x = 0;
+    tb5.velocity.x = 0;
+    tb6.velocity.x = 0;
+    bird.velocity.y = 0;
+    gravedad = 0;
+    fzasalto = 0;
+    background(220);
+    textAlign(CENTER);
+    textSize(100);
+    fill(0,0,255);
+    textStyle(BOLD);
+    text("GAME OVER", width / 2, height / 2);
+    textSize(70);
+    fill(0);
+    text(`Puntos: ${puntos}`, width / 2, 2 * height / 3);
 }
